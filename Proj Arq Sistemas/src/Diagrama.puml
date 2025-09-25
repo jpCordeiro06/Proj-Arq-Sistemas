@@ -1,0 +1,39 @@
+@startuml
+' Define a aparência do diagrama
+skinparam classAttributeIconSize 0
+
+' Definição das Classes
+class TurmaView {
+  + imprimeDados(turma: Turma): void
+  + mostraDados(turma: Turma): void
+}
+class TurmaDao {
+  + load(): Turma
+  + save(turma: Turma): void
+  + update(turma: Turma): void
+  + delete(turma: Turma): void
+}
+class Turma {
+  - alunos: List<Aluno>
+  + addAluno(aluno: Aluno): void
+  + removeAluno(aluno: Aluno): void
+  + getAlunos(): List<Aluno>
+  + calcMedia(): float
+}
+class Aluno {
+  - nome: String
+  - matricula: String
+  + getNome(): String
+  + getMatricula(): String
+}
+
+
+
+TurmaView ..> Turma : depende de
+TurmaDao ..> Turma : depende de
+
+' 1. O vínculo VISÍVEL é definido normalmente
+Turma "1" o--right-- "0..*" Aluno : contém
+
+
+@enduml
